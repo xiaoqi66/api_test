@@ -8,7 +8,7 @@ from Public.MyTest import MyTest
 
 
 # 加载测试用例文档数据
-date_test=makedata('回归_interface_20200927.xls',1)
+date_test=makedata('回归_interface_2021.xls',1)
 LOG.info("加载测试用例数据：{}".format(date_test))
 # date_test.pop(3)
 # date_test.pop(3)
