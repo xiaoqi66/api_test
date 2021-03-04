@@ -1,0 +1,30 @@
+image: docker:19.03.1
+
+services:
+  - docker:19.03.1-dind
+
+stages:
+  - deploy
+
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ''
+  DEPLOY_DEV_SCRIPT: "cd /data/docker && sshpass -f ./sshpass.txt sudo ./deploy.sh dev interface_dev interface python"
+  DEPLOY_UAT_SCRIPT: "cd /data/docker && sshpass -f ./sshpass.txt sudo ./deploy.sh uat interface_uat interface python"
+
+deploy_dev:
+  stage: deploy
+  script:
+    - export SSHPASS=$USER_PASS
+    - sshpass -e ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null yuedaoops@172.19.137.235 $DEPLOY_DEV_SCRIPT
+  only:
+    - dev
+
+deploy_uat:
+  stage: deploy
+  script:
+    - export SSHPASS=$USER_PASS
+    - sshpass -e ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null yuedaoops@172.19.137.237 $DEPLOY_UAT_SCRIPT
+  only:
+    - uat

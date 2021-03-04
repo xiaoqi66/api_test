@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>接口测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">接口测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> yoyo</p>
+<p class='attribute'><strong>开始时间 : </strong> 2021-03-02 17:08:48</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:00.271406</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 16，通过 2，错误 14，通过率= 12.50%</p>
+
+<p class='description'>测试结果</p>
+</div>
+
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 12.50% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>未通过{ 14 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 2 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 16 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>testCase.ddt_atest.Atest: 项目名称【自动化统计系统】</td>
+    <td class="text-center">16</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">14</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',16)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_atest_api_01</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in"> -->
+    <pre>
+    
+pt1_1: [2021-03-02 17:08:48.160044] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.161045] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.161045] INFO: interface: 用例编号：passenger_001
+[2021-03-02 17:08:48.161045] INFO: interface: 用例名称：正确登录
+[2021-03-02 17:08:48.161045] INFO: interface: 请求url：
+http://t-basic.visioneschool.com/v1/api/auth/login
+[2021-03-02 17:08:48.161045] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.161045] INFO: interface: 预置header：{"Content-Type":"application/json"}
+[2021-03-02 17:08:48.161045] INFO: interface: 依赖关系：
+[2021-03-02 17:08:48.161045] INFO: interface: 请求参数：{"userType":"Employee","userName":"SH0133","password":"E2F5E798186344470F784F353A80EF7F"}
+[2021-03-02 17:08:48.161045] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.161045] INFO: interface: 请求方式：POST
+[2021-03-02 17:08:48.208095] INFO: interface: 请求结果：{"code":"success","data":{"userDetail":{"username":"SH0133","accountNonExpired":true,"accountNonLocked":true,"credentialsNonExpired":true,"enabled":true,"authorities":[],"privileges":{},"userType":"Employee","userUid":"SH0133","realName":"黄伊伊","titleId":0,"countryCode":null,"phone":"15972066885","identities":[]}},"message":""}
+[2021-03-02 17:08:48.208095] INFO: interface: 预期结果：$..username=SH0133||$..code=success
+[2021-03-02 17:08:48.212117] INFO: interface: 断言成功，用例编号：passenger_001
+[2021-03-02 17:08:48.213115] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.213115] INFO: interface: ===========================================================================
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_atest_api_02</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse in"> -->
+    <pre>
+    
+pt1_2: [2021-03-02 17:08:48.214112] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.214112] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.215109] INFO: interface: 用例编号：passenger_002
+[2021-03-02 17:08:48.215109] INFO: interface: 用例名称：正确用户名错误密码登录
+[2021-03-02 17:08:48.215109] INFO: interface: 请求url：
+http://t-basic.visioneschool.com/v1/api/auth/login
+[2021-03-02 17:08:48.216110] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.216110] INFO: interface: 预置header：{"Content-Type":"application/json"}
+[2021-03-02 17:08:48.216110] INFO: interface: 依赖关系：
+[2021-03-02 17:08:48.217104] INFO: interface: 请求参数：{"userType":"Employee","userName":"SH0133","password":"E2F5E798186344470F784F353A80EF8"}
+[2021-03-02 17:08:48.217104] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.217104] INFO: interface: 请求方式：POST
+[2021-03-02 17:08:48.252055] INFO: interface: 请求结果：{"code":"auth.badUserOrCredentials.error","data":null,"message":"用户名或者密码错误"}
+[2021-03-02 17:08:48.252055] INFO: interface: 预期结果：$..code=auth.badUserOrCredentials.error||$..message=用户名或者密码错误
+[2021-03-02 17:08:48.253014] INFO: interface: 断言成功，用例编号：passenger_002
+[2021-03-02 17:08:48.254044] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.254044] INFO: interface: ===========================================================================
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_03</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse in"> -->
+    <pre>
+    
+ft1_3: [2021-03-02 17:08:48.254044] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.255041] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.255041] INFO: interface: 用例编号：passenger_003
+[2021-03-02 17:08:48.256045] INFO: interface: 用例名称：产生token
+[2021-03-02 17:08:48.256045] INFO: interface: 请求url：
+http://t-basic.visioneschool.com/v1/api/auth/createContractToken
+[2021-03-02 17:08:48.256045] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.256045] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive"}
+[2021-03-02 17:08:48.257042] INFO: interface: 依赖关系：
+[2021-03-02 17:08:48.257042] INFO: interface: 请求参数：{"applicationUid":"Weixun_EnterpriseStudyAdvancementPlanAdmin","contracts":[{"contractUid":"va.biz.service.collegePlan"}]}
+[2021-03-02 17:08:48.257042] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.258049] INFO: interface: 请求方式：POST
+[2021-03-02 17:08:48.268527] INFO: interface: 请求结果：&lt;html&gt;&lt;head&gt;&lt;title&gt;403Forbidden&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;403Forbidden&lt;/h1&gt;&lt;/center&gt;&lt;hr&gt;&lt;center&gt;nginx/1.16.1&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;
+[2021-03-02 17:08:48.268527] INFO: interface: 预期结果：$..code=success
+[2021-03-02 17:08:48.269569] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.269569] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 202, in test_atest_api
+    raise NameError("接口返回结果不存在要验证的KEY值，用例编号：%s" % date['id'])
+NameError: 接口返回结果不存在要验证的KEY值，用例编号：passenger_003
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_04</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
+    <div id='div_ft1_4' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
+    <div id='div_ft1_4' class="collapse in"> -->
+    <pre>
+    
+ft1_4: [2021-03-02 17:08:48.273558] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.274555] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.274555] INFO: interface: 用例编号：passenger_004
+[2021-03-02 17:08:48.274555] INFO: interface: 用例名称：新建保存申学记录
+[2021-03-02 17:08:48.275516] INFO: interface: 请求url：https://dev.yuedaowang.com/v1/api/collegePlan/saveStudentApply
+[2021-03-02 17:08:48.275516] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.275516] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":"JWT%s"}
+[2021-03-02 17:08:48.276511] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.276511] INFO: interface: 请求参数：{"studentUid":"1000009396","saveType":1,"studentApplyMajor":[{"majorCode":"T2","applyStatus":2,"majorName":"测试专业2","majorSubCode":"TT3","majorSubName":"","coOpFlag":1,"canadaMajorOptions":[{"majorSubCode":"TT3","majorSubName":"测试细分专业2-1"}]}],"entranceYear":3,"studyDirection":6,"schoolCode":"TGC01","schoolName":"UniversityofToronto-GeorgeCampus(测试)","degreeType":4}
+[2021-03-02 17:08:48.276511] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.277508] INFO: interface: 请求方式：POST
+[2021-03-02 17:08:48.347410] INFO: interface: 请求结果：&lt;html&gt;&lt;head&gt;&lt;title&gt;404NotFound&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;404NotFound&lt;/h1&gt;&lt;/center&gt;&lt;hr&gt;&lt;center&gt;nginx/1.17.3&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;
+[2021-03-02 17:08:48.347410] INFO: interface: 预期结果：$..code=success
+[2021-03-02 17:08:48.347410] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.348403] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 202, in test_atest_api
+    raise NameError("接口返回结果不存在要验证的KEY值，用例编号：%s" % date['id'])
+NameError: 接口返回结果不存在要验证的KEY值，用例编号：passenger_004
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_05</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_5'>错误</button>
+    <div id='div_ft1_5' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_5'>错误</button>
+    <div id='div_ft1_5' class="collapse in"> -->
+    <pre>
+    
+ft1_5: [2021-03-02 17:08:48.348403] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.348403] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.348403] INFO: interface: 用例编号：passenger_005
+[2021-03-02 17:08:48.348403] INFO: interface: 用例名称：不传专业名称
+[2021-03-02 17:08:48.348403] INFO: interface: 请求url：https://dev.yuedaowang.com/v2/api/collegePlan/saveStudentApply
+[2021-03-02 17:08:48.349372] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.349372] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":"JWT%s"}
+[2021-03-02 17:08:48.349372] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.349372] INFO: interface: 请求参数：{"studentUid":"1000009396","saveType":1,"studentApplyMajor":[{"majorCode":"T2","applyStatus":2,"majorName":"","majorSubCode":"TT3","majorSubName":"","coOpFlag":1,"canadaMajorOptions":[{"majorSubCode":"TT3","majorSubName":"测试细分专业2-1"}]}],"entranceYear":3,"studyDirection":6,"schoolCode":"TGC01","schoolName":"UniversityofToronto-GeorgeCampus(测试)","degreeType":4}
+[2021-03-02 17:08:48.349372] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.349372] INFO: interface: 请求方式：POST
+[2021-03-02 17:08:48.398555] INFO: interface: 请求结果：&lt;html&gt;&lt;head&gt;&lt;title&gt;404NotFound&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;404NotFound&lt;/h1&gt;&lt;/center&gt;&lt;hr&gt;&lt;center&gt;nginx/1.17.3&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;
+[2021-03-02 17:08:48.398555] INFO: interface: 预期结果：$..code=1440003||$..message=已申请过该专业
+[2021-03-02 17:08:48.399544] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.399544] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 185, in test_atest_api
+    raise NameError("接口返回结果不存在要验证的KEY值，用例编号：%s" % date['id'])
+NameError: 接口返回结果不存在要验证的KEY值，用例编号：passenger_005
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_06</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_6'>错误</button>
+    <div id='div_ft1_6' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_6'>错误</button>
+    <div id='div_ft1_6' class="collapse in"> -->
+    <pre>
+    
+ft1_6: [2021-03-02 17:08:48.400543] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.400543] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.400543] INFO: interface: 用例编号：passenger_006
+[2021-03-02 17:08:48.401547] INFO: interface: 用例名称：不传学校code
+[2021-03-02 17:08:48.401547] INFO: interface: 请求url：https://dev.yuedaowang.com/v3/api/collegePlan/saveStudentApply
+[2021-03-02 17:08:48.401547] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.401547] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.401547] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.402499] INFO: interface: 请求参数：{"studentUid":"1000009396","saveType":1,"studentApplyMajor":[{"majorCode":"T2","applyStatus":2,"majorName":"测试专业2","majorSubCode":"TT3","majorSubName":"","coOpFlag":1,"canadaMajorOptions":[{"majorSubCode":"TT3","majorSubName":"测试细分专业2-1"}]}],"entranceYear":3,"studyDirection":6,"schoolCode":"","schoolName":"UniversityofToronto-GeorgeCampus(测试)","degreeType":4}
+[2021-03-02 17:08:48.402499] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.402499] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.402499] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.404539] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.404539] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_07</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_7'>错误</button>
+    <div id='div_ft1_7' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_7'>错误</button>
+    <div id='div_ft1_7' class="collapse in"> -->
+    <pre>
+    
+ft1_7: [2021-03-02 17:08:48.405491] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.405491] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.406534] INFO: interface: 用例编号：passenger_007
+[2021-03-02 17:08:48.406534] INFO: interface: 用例名称：传入错误的uid
+[2021-03-02 17:08:48.406534] INFO: interface: 请求url：https://dev.yuedaowang.com/v4/api/collegePlan/saveStudentApply
+[2021-03-02 17:08:48.406534] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.407485] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.407485] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.407485] INFO: interface: 请求参数：{"studentUid":"1000001116","saveType":1,"studentApplyMajor":[{"majorCode":"T2","applyStatus":2,"majorName":"测试专业2","majorSubCode":"TT3","majorSubName":"","coOpFlag":1,"canadaMajorOptions":[{"majorSubCode":"TT3","majorSubName":"测试细分专业2-1"}]}],"entranceYear":3,"studyDirection":6,"schoolCode":"TGC01","schoolName":"UniversityofToronto-GeorgeCampus(测试)","degreeType":4}
+[2021-03-02 17:08:48.407485] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.407485] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.408526] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.409515] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.409515] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_08</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_8'>错误</button>
+    <div id='div_ft1_8' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_8'>错误</button>
+    <div id='div_ft1_8' class="collapse in"> -->
+    <pre>
+    
+ft1_8: [2021-03-02 17:08:48.410524] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.410524] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.410524] INFO: interface: 用例编号：passenger_008
+[2021-03-02 17:08:48.410524] INFO: interface: 用例名称：重复申请专业
+[2021-03-02 17:08:48.410524] INFO: interface: 请求url：https://dev.yuedaowang.com/v5/api/collegePlan/saveStudentApply
+[2021-03-02 17:08:48.410524] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.411502] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.411502] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.411502] INFO: interface: 请求参数：{"studentUid":"1000009396","saveType":1,"studentApplyMajor":[{"majorCode":"T2","applyStatus":2,"majorName":"测试专业2","majorSubCode":"TT3","majorSubName":"","coOpFlag":1,"canadaMajorOptions":[{"majorSubCode":"TT3","majorSubName":"测试细分专业2-1"}]}],"entranceYear":3,"studyDirection":6,"schoolCode":"TGC01","schoolName":"UniversityofToronto-GeorgeCampus(测试)","degreeType":4}
+[2021-03-02 17:08:48.411502] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.411502] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.411502] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.412500] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.412500] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_09</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_9'>错误</button>
+    <div id='div_ft1_9' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_9'>错误</button>
+    <div id='div_ft1_9' class="collapse in"> -->
+    <pre>
+    
+ft1_9: [2021-03-02 17:08:48.412500] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.413498] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.413498] INFO: interface: 用例编号：passenger_009
+[2021-03-02 17:08:48.413498] INFO: interface: 用例名称：查看申学记录，传入正确的申学记录uid
+[2021-03-02 17:08:48.413498] INFO: interface: 请求url：https://dev.yuedaowang.com/v1/api/collegePlan/getStudentApply
+[2021-03-02 17:08:48.413498] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.413498] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.413498] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.413498] INFO: interface: 请求参数：{"applyRecordUid":"20210302816265682074583040"}
+[2021-03-02 17:08:48.413498] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.413498] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.414495] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.414495] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.414495] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_10</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_10'>错误</button>
+    <div id='div_ft1_10' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_10'>错误</button>
+    <div id='div_ft1_10' class="collapse in"> -->
+    <pre>
+    
+ft1_10: [2021-03-02 17:08:48.415492] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.415492] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.415492] INFO: interface: 用例编号：passenger_010
+[2021-03-02 17:08:48.415492] INFO: interface: 用例名称：传入错误的申学记录uid
+[2021-03-02 17:08:48.415492] INFO: interface: 请求url：https://dev.yuedaowang.com/v1/api/collegePlan/getStudentApply
+[2021-03-02 17:08:48.415492] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.415492] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.416462] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.416462] INFO: interface: 请求参数：{"applyRecordUid":"2021030281626"}
+[2021-03-02 17:08:48.416462] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.416462] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.416462] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.416462] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.417487] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_11' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_11</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_11'>错误</button>
+    <div id='div_ft1_11' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_11'>错误</button>
+    <div id='div_ft1_11' class="collapse in"> -->
+    <pre>
+    
+ft1_11: [2021-03-02 17:08:48.417487] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.417487] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.417487] INFO: interface: 用例编号：passenger_011
+[2021-03-02 17:08:48.417487] INFO: interface: 用例名称：不传token
+[2021-03-02 17:08:48.417487] INFO: interface: 请求url：https://dev.yuedaowang.com/v1/api/collegePlan/getStudentApply
+[2021-03-02 17:08:48.418485] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.418485] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.418485] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.418485] INFO: interface: 请求参数：{"applyRecordUid":"20210302816265682074583040"}
+[2021-03-02 17:08:48.418485] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.418485] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.418485] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.419481] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.419481] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_12</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_12'>错误</button>
+    <div id='div_ft1_12' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_12'>错误</button>
+    <div id='div_ft1_12' class="collapse in"> -->
+    <pre>
+    
+ft1_12: [2021-03-02 17:08:48.419481] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.419481] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.420479] INFO: interface: 用例编号：passenger_012
+[2021-03-02 17:08:48.420479] INFO: interface: 用例名称：更新编辑记录
+[2021-03-02 17:08:48.420479] INFO: interface: 请求url：https://dev.yuedaowang.com/v1/api/collegePlan/updateStudentApply
+[2021-03-02 17:08:48.420479] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.420479] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.420479] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.420479] INFO: interface: 请求参数：{"applyRecordUid":"20210302816256535039959040","entranceYear":1,"studyDirection":2,"schoolCode":"XG101","schoolName":"香港大学","collegeCode":"","collegeName":"","degreeType":3,"studentApplyMajor":[{"uid":"20210302816256535161442304","majorCode":"XGM070","majorName":"Arts","applyStatus":4,"collegeIsAdjust":2,"noticeTime":"2021-03-01","interviewTime":[{"interviewTime":"2021-03-02"}],"interviewType":1,"interviewArea":6}],"studentUid":"1000009396"}
+[2021-03-02 17:08:48.420479] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.420479] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.421478] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.421478] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.421478] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_13</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_13'>错误</button>
+    <div id='div_ft1_13' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_13'>错误</button>
+    <div id='div_ft1_13' class="collapse in"> -->
+    <pre>
+    
+ft1_13: [2021-03-02 17:08:48.422473] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.422473] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.422473] INFO: interface: 用例编号：passenger_013
+[2021-03-02 17:08:48.422473] INFO: interface: 用例名称：申请状态回退
+[2021-03-02 17:08:48.422473] INFO: interface: 请求url：https://dev.yuedaowang.com/v2/api/collegePlan/updateStudentApply
+[2021-03-02 17:08:48.422473] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.422473] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.422473] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.423471] INFO: interface: 请求参数：{"applyRecordUid":"20210302816256535039959040","entranceYear":1,"studyDirection":2,"schoolCode":"XG101","schoolName":"香港大学","collegeCode":"","collegeName":"","degreeType":3,"studentApplyMajor":[{"uid":"20210302816256535161442304","majorCode":"XGM070","majorName":"Arts","applyStatus":1,"collegeIsAdjust":2,"noticeTime":"2021-03-01","interviewTime":[{"interviewTime":"2021-03-02"}],"interviewType":1,"interviewArea":6}],"studentUid":"1000009396"}
+[2021-03-02 17:08:48.423471] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.423471] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.423471] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.424469] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.424469] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_14' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_14</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_14'>错误</button>
+    <div id='div_ft1_14' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_14'>错误</button>
+    <div id='div_ft1_14' class="collapse in"> -->
+    <pre>
+    
+ft1_14: [2021-03-02 17:08:48.424469] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.424469] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.425466] INFO: interface: 用例编号：passenger_014
+[2021-03-02 17:08:48.425466] INFO: interface: 用例名称：不传申请uid
+[2021-03-02 17:08:48.425466] INFO: interface: 请求url：https://dev.yuedaowang.com/v3/api/collegePlan/updateStudentApply
+[2021-03-02 17:08:48.425466] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.425466] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.425466] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.425466] INFO: interface: 请求参数：{"applyRecordUid":"20210302816256535039959040","entranceYear":1,"studyDirection":2,"schoolCode":"XG101","schoolName":"香港大学","collegeCode":"","collegeName":"","degreeType":3,"studentApplyMajor":[{"uid":"","majorCode":"XGM070","majorName":"Arts","applyStatus":1,"collegeIsAdjust":2,"noticeTime":"2021-03-01","interviewTime":[{"interviewTime":"2021-03-02"}],"interviewType":1,"interviewArea":6}],"studentUid":"1000009396"}
+[2021-03-02 17:08:48.425466] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.425466] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.426463] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.426463] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.426463] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_15' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_15</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_15'>错误</button>
+    <div id='div_ft1_15' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_15'>错误</button>
+    <div id='div_ft1_15' class="collapse in"> -->
+    <pre>
+    
+ft1_15: [2021-03-02 17:08:48.427463] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.427463] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.427463] INFO: interface: 用例编号：passenger_015
+[2021-03-02 17:08:48.427463] INFO: interface: 用例名称：获取申请记录
+[2021-03-02 17:08:48.427463] INFO: interface: 请求url：https://dev.yuedaowang.com/v1/api/collegePlan/listStudentApply
+[2021-03-02 17:08:48.427463] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.427463] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.427463] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.428457] INFO: interface: 请求参数：{"studentUid":"1000009396"}
+[2021-03-02 17:08:48.428457] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.428457] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.428457] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.428457] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.429457] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_16' class='none'>
+    <td class='errorCase'><div class='testcase'>test_atest_api_16</div></td>
+    <td colspan='5' align='left'>
+    <!--默认收起错误信息 -Findyou -->
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_16'>错误</button>
+    <div id='div_ft1_16' class="collapse">  
+
+    <!-- 默认展开错误信息 -Findyou 
+    <button id='btn_ft1_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_16'>错误</button>
+    <div id='div_ft1_16' class="collapse in"> -->
+    <pre>
+    
+ft1_16: [2021-03-02 17:08:48.429457] INFO: interface: 测试用例开始执行
+[2021-03-02 17:08:48.429457] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 17:08:48.429457] INFO: interface: 用例编号：passenger_016
+[2021-03-02 17:08:48.429457] INFO: interface: 用例名称：错误的学生uid
+[2021-03-02 17:08:48.429457] INFO: interface: 请求url：https://dev.yuedaowang.com/v1/api/collegePlan/listStudentApply
+[2021-03-02 17:08:48.430452] INFO: interface: 预置条件：
+[2021-03-02 17:08:48.430452] INFO: interface: 预置header：{"Content-Type":"application/json","Content-Length":"&lt;calculatedwhenrequestissent&gt;","Host":"&lt;calculatedwhenrequestissent&gt;","Connection":"keep-alive","authorization":JWT"%s"}
+[2021-03-02 17:08:48.430452] INFO: interface: 依赖关系：{"passenger_003":["$..token"]}
+[2021-03-02 17:08:48.430452] INFO: interface: 请求参数：{"studentUid":"10000111"}
+[2021-03-02 17:08:48.430452] INFO: interface: 参数类型：JSON
+[2021-03-02 17:08:48.430452] INFO: interface: Excel请求header格式有误，请检查
+[2021-03-02 17:08:48.430452] INFO: interface: 请求方式：POST
+post请求出错，出错原因：'str' object has no attribute 'items'
+[2021-03-02 17:08:48.431450] INFO: interface: 测试用例执行完毕
+[2021-03-02 17:08:48.431450] INFO: interface: ===========================================================================
+Traceback (most recent call last):
+  File "D:\python\lib\site-packages\ddt.py", line 182, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\Public\log.py", line 36, in _wrap
+    return function(*args,**kwargs)
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\testCase\ddt_atest.py", line 168, in test_atest_api
+    apijson = api.getJson()
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 150, in getJson
+    json_data = self.testapi().text
+  File "C:\Users\uesr\PycharmProjects\pythonProject3\interface-uat\interface\testfengzhuang.py", line 66, in testapi
+    response_text=response.text
+AttributeError: 'dict' object has no attribute 'text'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>16</td>
+    <td>2</td>
+    <td>14</td>
+    <td>14</td>
+    <td>通过率：12.50%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>

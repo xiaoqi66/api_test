@@ -1,0 +1,31 @@
+[2021-03-02 10:26:30.007896] INFO: interface: 加载测试用例数据：[{'id': 'passenger_001', 'casename': '正确登录', 'preset': '', 'header': '{"Content-Type":"application/json"}', 'depend': '', 'url': '\nhttp://t-basic.visioneschool.com/v1/api/auth/login', 'parame': '{"userType":"Employee","userName":"SH0133","password":"E2F5E798186344470F784F353A80EF7F"}', 'patype': 'JSON', 'method': 'POST', 'yq': '$..username=SH0133\n$..code=success'}, {'id': 'passenger_002', 'casename': '正确用户名错误密码登录', 'preset': '', 'header': '{"Content-Type":"application/json"}', 'depend': '', 'url': 'https://dev.yuedaowang.com/passenger/login', 'parame': '{"userType":"Employee","userName":"SH0133","password":"E2F5E798186344470F784F353A80EF8"}', 'patype': 'JSON', 'method': 'POST', 'yq': '$..code=auth.badUserOrCredentials.error\n$..message=用户名或者密码错误'}]
+[2021-03-02 10:26:30.010893] INFO: interface: 测试用例开始执行
+[2021-03-02 10:26:30.010893] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 10:26:30.010893] INFO: interface: 用例编号：passenger_001
+[2021-03-02 10:26:30.011887] INFO: interface: 用例名称：正确登录
+[2021-03-02 10:26:30.011887] INFO: interface: 请求url：
+http://t-basic.visioneschool.com/v1/api/auth/login
+[2021-03-02 10:26:30.011887] INFO: interface: 预置条件：
+[2021-03-02 10:26:30.011887] INFO: interface: 预置header：{"Content-Type":"application/json"}
+[2021-03-02 10:26:30.011887] INFO: interface: 依赖关系：
+[2021-03-02 10:26:30.011887] INFO: interface: 请求参数：{"userType":"Employee","userName":"SH0133","password":"E2F5E798186344470F784F353A80EF7F"}
+[2021-03-02 10:26:30.011887] INFO: interface: 参数类型：JSON
+[2021-03-02 10:26:30.011887] INFO: interface: 请求方式：POST
+[2021-03-02 10:26:30.102039] INFO: interface: 请求结果：{"code":"success","data":{"userDetail":{"username":"SH0133","accountNonExpired":true,"accountNonLocked":true,"credentialsNonExpired":true,"enabled":true,"authorities":[],"privileges":{},"userType":"Employee","userUid":"SH0133","realName":"黄伊伊","titleId":0,"countryCode":null,"phone":"15972066885","identities":[]}},"message":""}
+[2021-03-02 10:26:30.102039] INFO: interface: 预期结果：$..username=SH0133||$..code=success
+[2021-03-02 10:26:30.106012] INFO: interface: 断言成功，用例编号：passenger_001
+[2021-03-02 10:26:30.107007] INFO: interface: 测试用例执行完毕
+[2021-03-02 10:26:30.107007] INFO: interface: ===========================================================================
+[2021-03-02 10:26:30.108005] INFO: interface: 测试用例开始执行
+[2021-03-02 10:26:30.108005] INFO: interface: 运行位置:test_atest_api
+[2021-03-02 10:26:30.109005] INFO: interface: 用例编号：passenger_002
+[2021-03-02 10:26:30.109005] INFO: interface: 用例名称：正确用户名错误密码登录
+[2021-03-02 10:26:30.109005] INFO: interface: 请求url：https://dev.yuedaowang.com/passenger/login
+[2021-03-02 10:26:30.109005] INFO: interface: 预置条件：
+[2021-03-02 10:26:30.110000] INFO: interface: 预置header：{"Content-Type":"application/json"}
+[2021-03-02 10:26:30.110000] INFO: interface: 依赖关系：
+[2021-03-02 10:26:30.110000] INFO: interface: 请求参数：{"userType":"Employee","userName":"SH0133","password":"E2F5E798186344470F784F353A80EF8"}
+[2021-03-02 10:26:30.110996] INFO: interface: 参数类型：JSON
+[2021-03-02 10:26:30.110996] INFO: interface: 请求方式：POST
+[2021-03-02 10:26:30.342037] INFO: interface: 测试用例执行完毕
+[2021-03-02 10:26:30.343034] INFO: interface: ===========================================================================

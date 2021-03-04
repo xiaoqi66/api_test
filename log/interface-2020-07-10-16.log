@@ -1,0 +1,15 @@
+[2020-07-10 16:52:45.624677] INFO: interface: 测试用例开始执行
+[2020-07-10 16:52:45.625677] INFO: interface: 运行位置:test_atest_api
+[2020-07-10 16:52:45.626677] INFO: interface: 用例编号：Dispatch_010
+[2020-07-10 16:52:45.626677] INFO: interface: 用例名称：上传股权文件（upload）
+[2020-07-10 16:52:45.627677] INFO: interface: 请求url：http://10.10.11.88:9003/handwork/upload.do
+[2020-07-10 16:52:45.628677] INFO: interface: 预置条件：
+[2020-07-10 16:52:45.629677] INFO: interface: 预置header：
+[2020-07-10 16:52:45.629677] INFO: interface: 依赖关系：{"Dispatch_001":["$..eventId"]}
+[2020-07-10 16:52:45.630677] INFO: interface: 请求参数：{"taskCode":"V0201","eventId":"17485"}&{"file": "E:\\lys\\688001_15614.dbf"}
+[2020-07-10 16:52:45.631677] INFO: interface: 参数类型：multipart/form-data
+[2020-07-10 16:52:45.632677] INFO: interface: 请求方式：POST
+[2020-07-10 16:52:47.823802] INFO: interface: 请求结果：[{"ftpId":null,"taskId":null,"ftpType":"scheduleFtp","ftpStatus":null,"fileName":"HANDWORK_7db07a61-7a6f-43bf-8dd9-a945c66933ca.dbf","filePath":"/projects/data/sivdc/equity/astock","fileSize":null,"fileMd5":null,"lastFileMd5":null,"lastFilePath":null,"remoteFileName":"HANDWORK_ae492339-fa13-473b-8b9f-a1efba6bfff5.dbf","remoteFilePath":"./schedule","createTime":null,"downloadTime":null}]
+[2020-07-10 16:52:47.825803] INFO: interface: 预期结果：$..fileName=HANDWORK_||$..filePath=/projects/data/sivdc/equity/astock||$..remoteFileName=HANDWORK_
+[2020-07-10 16:52:47.831803] INFO: interface: 测试用例执行完毕
+[2020-07-10 16:52:47.832803] INFO: interface: ===========================================================================

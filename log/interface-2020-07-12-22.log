@@ -1,0 +1,63 @@
+[2020-07-12 22:01:14.026405] INFO: interface: 加载测试用例数据：[{'id': 'driverRegister_001', 'casename': '获取验证码', 'preset': '', 'header': '', 'depend': '', 'url': 'https://dev.yuedaowang.com/api/user/getVCode', 'parame': '{"cell":"13600000000"}', 'patype': 'JSON', 'method': 'POST', 'yq': '$..code=0\n$..msg=success\n$..data=验证码已经发送至您的手机'}, {'id': 'driverRegister_002', 'casename': '登录', 'preset': '', 'header': '', 'depend': '', 'url': 'https://dev.yuedaowang.com/api/user/userRegAndLogin', 'parame': '{"cell":"13600000000","vcode":"709861","password":"B59C67BF196A4758191E42F76670CEBA"}', 'patype': 'JSON', 'method': 'POST', 'yq': '$..code=0\n$..msg=success'}, {'id': 'driverRegister_003', 'casename': '更新密码', 'preset': '', 'header': '', 'depend': '', 'url': 'https://dev.yuedaowang.com/api/user/createPassword', 'parame': '{\n  "password": "B59C67BF196A4758191E42F76670CEBA",\n  "vcode": "323211"\n}', 'patype': 'JSON', 'method': 'POST', 'yq': '$..code=0\n$..msg=success'}, {'id': 'driverRegister_004', 'casename': '查询用户信息', 'preset': '', 'header': '', 'depend': '', 'url': 'https://dev.yuedaowang.com/api/user/searchUser', 'parame': '', 'patype': 'JSON', 'method': 'GET', 'yq': '$..code=0\n$..msg=success'}]
+[2020-07-12 22:01:14.030352] INFO: interface: 测试用例开始执行
+[2020-07-12 22:01:14.032401] INFO: interface: 运行位置:test_atest_api
+[2020-07-12 22:01:14.034341] INFO: interface: 用例编号：driverRegister_001
+[2020-07-12 22:01:14.035339] INFO: interface: 用例名称：获取验证码
+[2020-07-12 22:01:14.037338] INFO: interface: 请求url：https://dev.yuedaowang.com/api/user/getVCode
+[2020-07-12 22:01:14.038333] INFO: interface: 预置条件：
+[2020-07-12 22:01:14.040471] INFO: interface: 预置header：
+[2020-07-12 22:01:14.042363] INFO: interface: 依赖关系：
+[2020-07-12 22:01:14.043317] INFO: interface: 请求参数：{"cell":"13600000000"}
+[2020-07-12 22:01:14.045311] INFO: interface: 参数类型：JSON
+[2020-07-12 22:01:14.047307] INFO: interface: 请求方式：POST
+[2020-07-12 22:01:16.417828] INFO: interface: 请求结果：{"code":0,"msg":"success","data":"验证码已经发送至您的手机！237884"}
+[2020-07-12 22:01:16.421817] INFO: interface: 预期结果：$..code=0||$..msg=success||$..data=验证码已经发送至您的手机
+[2020-07-12 22:01:16.429757] INFO: interface: 断言成功：driverRegister_001
+[2020-07-12 22:01:16.432800] INFO: interface: 测试用例执行完毕
+[2020-07-12 22:01:16.435856] INFO: interface: ===========================================================================
+[2020-07-12 22:01:16.439768] INFO: interface: 测试用例开始执行
+[2020-07-12 22:01:16.442726] INFO: interface: 运行位置:test_atest_api
+[2020-07-12 22:01:16.445793] INFO: interface: 用例编号：driverRegister_002
+[2020-07-12 22:01:16.449259] INFO: interface: 用例名称：登录
+[2020-07-12 22:01:16.451807] INFO: interface: 请求url：https://dev.yuedaowang.com/api/user/userRegAndLogin
+[2020-07-12 22:01:16.454690] INFO: interface: 预置条件：
+[2020-07-12 22:01:16.457677] INFO: interface: 预置header：
+[2020-07-12 22:01:16.459835] INFO: interface: 依赖关系：
+[2020-07-12 22:01:16.462707] INFO: interface: 请求参数：{"cell":"13600000000","vcode":"709861","password":"B59C67BF196A4758191E42F76670CEBA"}
+[2020-07-12 22:01:16.465664] INFO: interface: 参数类型：JSON
+[2020-07-12 22:01:16.469645] INFO: interface: 请求方式：POST
+[2020-07-12 22:01:18.658918] INFO: interface: 请求结果：{"code":1,"msg":"登录失败！短信验证码错误","data":null}
+[2020-07-12 22:01:18.662907] INFO: interface: 预期结果：$..code=0||$..msg=success
+[2020-07-12 22:01:18.666896] INFO: interface: 测试用例执行完毕
+[2020-07-12 22:01:18.670106] INFO: interface: ===========================================================================
+[2020-07-12 22:01:18.679861] INFO: interface: 测试用例开始执行
+[2020-07-12 22:01:18.682853] INFO: interface: 运行位置:test_atest_api
+[2020-07-12 22:01:18.685845] INFO: interface: 用例编号：driverRegister_003
+[2020-07-12 22:01:18.689833] INFO: interface: 用例名称：更新密码
+[2020-07-12 22:01:18.693026] INFO: interface: 请求url：https://dev.yuedaowang.com/api/user/createPassword
+[2020-07-12 22:01:18.695818] INFO: interface: 预置条件：
+[2020-07-12 22:01:18.698819] INFO: interface: 预置header：
+[2020-07-12 22:01:18.701803] INFO: interface: 依赖关系：
+[2020-07-12 22:01:18.705887] INFO: interface: 请求参数：{
+  "password": "B59C67BF196A4758191E42F76670CEBA",
+  "vcode": "323211"
+}
+[2020-07-12 22:01:18.708878] INFO: interface: 参数类型：JSON
+[2020-07-12 22:01:18.711780] INFO: interface: 请求方式：POST
+[2020-07-12 22:01:22.538610] INFO: interface: 请求结果：{"code":1,"msg":"解析token异常！","data":"{\"error\":\"invalid_request\",\"error_description\":\"Authentication failed.\"}"}
+[2020-07-12 22:01:22.541607] INFO: interface: 预期结果：$..code=0||$..msg=success
+[2020-07-12 22:01:22.544936] INFO: interface: 测试用例执行完毕
+[2020-07-12 22:01:22.547583] INFO: interface: ===========================================================================
+[2020-07-12 22:01:22.553567] INFO: interface: 测试用例开始执行
+[2020-07-12 22:01:22.558719] INFO: interface: 运行位置:test_atest_api
+[2020-07-12 22:01:22.561669] INFO: interface: 用例编号：driverRegister_004
+[2020-07-12 22:01:22.564536] INFO: interface: 用例名称：查询用户信息
+[2020-07-12 22:01:22.567534] INFO: interface: 请求url：https://dev.yuedaowang.com/api/user/searchUser
+[2020-07-12 22:01:22.570526] INFO: interface: 预置条件：
+[2020-07-12 22:01:22.573521] INFO: interface: 预置header：
+[2020-07-12 22:01:22.575516] INFO: interface: 依赖关系：
+[2020-07-12 22:01:22.578640] INFO: interface: 请求参数：
+[2020-07-12 22:01:22.581490] INFO: interface: 参数类型：JSON
+[2020-07-12 22:01:22.583489] INFO: interface: 请求方式：GET
+[2020-07-12 22:01:22.679233] INFO: interface: 测试用例执行完毕
+[2020-07-12 22:01:22.682223] INFO: interface: ===========================================================================
